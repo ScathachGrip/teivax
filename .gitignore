@@ -1,0 +1,14 @@
+/target
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+imageboards/*.ts
+
+## build
+auto-commit.md
+build.cmd

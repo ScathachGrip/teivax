@@ -1,0 +1,20 @@
+[package]
+name = "teivax"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.7"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "fs"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+metrics = "0.23"
+axum-prometheus = "0.7"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+sysinfo = "0.32"
+mimalloc = { version = "0.1", features = ["extended"] }
+dotenvy = "0.15"
+ureq = { version = "2", features = ["json"] }
+time = { version = "0.3", features = ["formatting", "macros", "local-offset"] }
