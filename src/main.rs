@@ -88,7 +88,7 @@ async fn dump_json() {
     }
     for anime in REGISTRY {
         let path = format!("json/{}.json", anime.id);
-        let _ = dump_one(&path, anime.tags).await;
+        let _ = dump_one(&path, anime.id, &anime.tags).await;
     }
     // dump global_anime_girls separately (different schema)
     let girls_path = "json/global_anime_girls.json";
@@ -108,10 +108,23 @@ async fn dump_json() {
     }
 }
 
-async fn dump_one(path: &str, items: &[&str]) -> std::io::Result<()> {
+async fn dump_one(path: &str, id: &str, data: &data::TagData) -> std::io::Result<()> {
     let start = std::time::Instant::now();
-    let json = serde_json::to_string_pretty(items).expect("serialize");
-    tokio::fs::write(path, json).await?;
+    match data {
+        data::TagData::Flat(items) => {
+            let json = serde_json::to_string_pretty(items).expect("serialize");
+            tokio::fs::write(path, json).await?;
+        }
+        data::TagData::Gif(items) => {
+            let wrapper = match id {
+                "data_gif" => serde_json::json!({"gif": items}),
+                "data_gif_nsfw" => serde_json::json!({"nsfw": items}),
+                _ => serde_json::to_value(items).expect("serialize"),
+            };
+            let json = serde_json::to_string_pretty(&wrapper).expect("serialize");
+            tokio::fs::write(path, json).await?;
+        }
+    }
     metrics::record_json_dump(path, start.elapsed().as_secs_f64());
     Ok(())
 }
