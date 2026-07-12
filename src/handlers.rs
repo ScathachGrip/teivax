@@ -8,7 +8,7 @@ use metrics::gauge;
 use serde::Serialize;
 use sysinfo::{Pid, System};
 
-use crate::data::{self, Anime, REGISTRY};
+use crate::data::{self, Anime, REGISTRY, BLOCKLISTS, GLOBAL_ANIME_GIRLS};
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 const REPO_URL: &str = "https://github.com/scathachgrip/teivax/blob/master/README.md#routing";
@@ -42,7 +42,7 @@ pub async fn index() -> impl IntoResponse {
             "tag_count": a.tags.len(),
             "endpoint": format!("/{}", a.id),
         })).collect::<Vec<_>>(),
-        "endpoints": ["/health", "/metrics", "/data"],
+        "endpoints": ["/health", "/metrics", "/data", "/global_anime_girls", "/blocklists"],
     }))
 }
 
@@ -54,12 +54,23 @@ pub async fn get_anime(
     State(state): State<AppState>,
     Path(id): Path<String>,
 ) -> impl IntoResponse {
+    if id == "global_anime_girls" {
+        return get_global_anime_girls().await.into_response();
+    }
     let Some(a) = data::by_id(&id) else {
         return (StatusCode::NOT_FOUND, format!("unknown anime: {id}")).into_response();
     };
     record(a);
     gauge!("process_uptime_seconds").set(state.started.elapsed().as_secs_f64());
     (StatusCode::OK, Json(a.tags)).into_response()
+}
+
+pub async fn get_blocklists() -> impl IntoResponse {
+    Json(BLOCKLISTS)
+}
+
+pub async fn get_global_anime_girls() -> impl IntoResponse {
+    Json(GLOBAL_ANIME_GIRLS)
 }
 
 fn record(a: &Anime) {
@@ -89,7 +100,7 @@ fn memory_stats() -> (String, String) {
     let rss = sys.process(pid).map(|p| p.memory()).unwrap_or(0) as f64 / 1024.0 / 1024.0;
     let (used_mb, total_mb) = mimalloc::MiMalloc::stats_json()
         .ok()
-        .and_then(|v| serde_json::from_slice::<serde_json::Value>(&v.to_bytes()).ok())
+        .and_then(|v| serde_json::from_slice::<serde_json::Value>(v.to_bytes()).ok())
         .map(|v| {
             let used = v
                 .get("committed")

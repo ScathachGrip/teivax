@@ -183,9 +183,9 @@ pub fn spawn_system_updater() {
                 gauge!("system_swap_total_bytes").set(s.total_swap() as f64);
 
                 let load = System::load_average();
-                gauge!("system_load1").set(load.one as f64);
-                gauge!("system_load5").set(load.five as f64);
-                gauge!("system_load15").set(load.fifteen as f64);
+                gauge!("system_load1").set(load.one);
+                gauge!("system_load5").set(load.five);
+                gauge!("system_load15").set(load.fifteen);
 
                 // Disks
                 {
@@ -267,7 +267,7 @@ pub fn spawn_system_updater() {
             // mimalloc — real GC-equivalent allocator stats via mi_stats_get_json
             {
                 if let Ok(s) = mimalloc::MiMalloc::stats_json() {
-                    if let Some(s) = s.to_str().ok() {
+                    if let Ok(s) = s.to_str() {
                         if let Ok(v) = serde_json::from_str::<serde_json::Value>(s) {
                             let p = |k: &str| {
                                 v.get("process")
