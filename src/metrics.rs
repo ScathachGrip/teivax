@@ -230,15 +230,8 @@ pub fn spawn_system_updater() {
                     } else {
                         0.0
                     });
-                    #[cfg(target_os = "linux")]
-                    {
-                        gauge!("process_open_fds")
-                            .set(proc_.open_files().map(|f| f.len() as f64).unwrap_or(0.0));
-                    }
-                    #[cfg(not(target_os = "linux"))]
-                    {
-                        gauge!("process_open_fds").set(0.0);
-                    }
+                    // open_files() requires sysinfo >=0.33; pinned at 0.32
+                    gauge!("process_open_fds").set(0.0);
                 }
             }
 
