@@ -96,7 +96,7 @@ Managing tag registries across multiple Discord bots is a maintenance nightmare.
 │           ┌─────────┴─────────┐                                                                  │
 │           v                   v                                                                  │
 │  ┌────────────────┐   ┌────────────────┐                                                         │
-│  │    nikke.rs    │   │  arknights.rs  │  ... 16 more tag files                                  │
+│  │    nikke.rs    │   │  arknights.rs  │  ... 18 more tag files                                  │
 │  │    106 tags    │   │    77 tags     │                                                         │
 │  └────────────────┘   └────────────────┘                                                         │
 │                                                                                                  │
@@ -135,7 +135,7 @@ Managing tag registries across multiple Discord bots is a maintenance nightmare.
 │                                                                                                  │
 │  ┌────────────────────────────────────────────────────────────────────────────────────────────┐  │
 │  │                                   REGISTRY (compile-time)                                  │  │
-│  │  &[Anime; 17]                                                                              │  │
+│  │  &[Anime; 18]                                                                              │  │
 │  │  • id: &'static str                                                                        │  │
 │  │  • title: &'static str                                                                     │  │
 │  │  • provider: &'static str                                                                  │  │
@@ -193,18 +193,18 @@ cargo build
 
 ## API
 
-| Route                     | Returns | Description                                                      |
-| ------------------------- | ------- | ---------------------------------------------------------------- |
-| `GET /`                   | JSON    | Alive check — version, server location, memory stats             |
-| `GET /data`               | JSON    | Registry index — all supported anime with tag counts             |
-| `GET /:id`                | JSON    | Tag array for an anime (e.g. `/nikke`, `/arknights`, `/genshin`) |
-| `GET /global_anime_girls` | JSON    | Global anime girls dataset                                       |
-| `GET /blocklists`         | JSON    | Blocklist entries per category                                   |
-| `GET /playground`         | HTML    | Browser UI (requires `gen_playground`)                           |
-| `GET /health`             | text    | `"ok"`                                                           |
-| `GET /loadavg`            | JSON    | System load average `{one, five, fifteen}`                       |
-| `GET /metrics`            | text    | Prometheus metrics                                               |
-| `GET /debug/mimalloc`     | JSON    | mimalloc allocator stats                                         |
+| Route                     | Returns | Description                                          |
+| ------------------------- | ------- | ---------------------------------------------------- |
+| `GET /`                   | JSON    | Alive check — version, server location, memory stats |
+| `GET /data`               | JSON    | Registry index — all supported anime with tag counts |
+| `GET /:id`                | JSON    | Tag data for an ID (e.g. `/nikke`, `/data_gif`)      |
+| `GET /global_anime_girls` | JSON    | Global anime girls dataset                           |
+| `GET /blocklists`         | JSON    | Blocklist entries per category                       |
+| `GET /playground`         | HTML    | Browser UI (requires `gen_playground`)               |
+| `GET /health`             | text    | `"ok"`                                               |
+| `GET /loadavg`            | JSON    | System load average `{one, five, fifteen}`           |
+| `GET /metrics`            | text    | Prometheus metrics                                   |
+| `GET /debug/mimalloc`     | JSON    | mimalloc allocator stats                             |
 
 ### `GET /data`
 
@@ -233,28 +233,30 @@ cargo build
 
 Unknown ID returns `404 Not Found` with body `unknown anime: <id>`.
 
-## Supported Titles (17)
+## Supported Titles (18)
 
-| ID                   | Title                     | Provider | Tags              |
-| -------------------- | ------------------------- | -------- | ----------------- |
-| genshin              | Genshin Impact            | rule34   | 148               |
-| nikke                | Nikke                     | rule34   | 106               |
-| arknights            | Arknights                 | rule34   | 77                |
-| bluearchive          | Blue Archive              | rule34   | 112               |
-| azurlane             | Azur Lane                 | rule34   | 82                |
-| fgo                  | Fate/Grand Order          | rule34   | 153               |
-| genshin_danbooru     | Genshin Impact (Danbooru) | danbooru | 38                |
-| honkai_starrail      | Honkai: Star Rail         | rule34   | 67                |
-| girls_frontline      | Girls' Frontline          | rule34   | 48                |
-| naruto               | Naruto                    | rule34   | 32                |
-| bleach               | Bleach                    | rule34   | 33                |
-| vtubers              | VTubers                   | rule34   | 376               |
-| danbooru_sex         | Danbooru Sex Tags         | danbooru | 66                |
-| gif_sex              | GIF Sex Tags              | others   | 32                |
-| hentai_yandere       | Hentai Yandere Tags       | yandere  | 51                |
-| ai_sex               | AI Sex Tags               | others   | 5                 |
-| _global_anime_girls_ | —                         | —        | special dataset   |
-| _blocklists_         | —                         | —        | blocklist entries |
+| ID                   | Title                     | Provider | Type   | Entries           |
+| -------------------- | ------------------------- | -------- | ------ | ----------------- |
+| nikke                | Nikke                     | rule34   | tags   | 106               |
+| arknights            | Arknights                 | rule34   | tags   | 77                |
+| bluearchive          | Blue Archive              | rule34   | tags   | 110               |
+| azurlane             | Azur Lane                 | rule34   | tags   | 80                |
+| fgo                  | Fate/Grand Order          | rule34   | tags   | 151               |
+| genshin              | Genshin Impact            | rule34   | tags   | 146               |
+| genshin_danbooru     | Genshin Impact (Danbooru) | danbooru | tags   | 36                |
+| honkai_starrail      | Honkai: Star Rail         | rule34   | tags   | 65                |
+| girls_frontline      | Girls' Frontline          | rule34   | tags   | 46                |
+| naruto               | Naruto                    | rule34   | tags   | 30                |
+| bleach               | Bleach                    | rule34   | tags   | 31                |
+| vtubers              | VTubers                   | rule34   | tags   | 374               |
+| danbooru_sex         | Danbooru Sex Tags         | danbooru | tags   | 64                |
+| data_gif             | GIFs                      | others   | return | 30                |
+| data_gif_nsfw        | NSFW GIFs                 | others   | return | 8                 |
+| gif_sex              | GIF Sex Tags              | others   | tags   | 30                |
+| hentai_yandere       | Hentai Yandere Tags       | yandere  | tags   | 49                |
+| ai_sex               | AI Sex Tags               | others   | tags   | 3                 |
+| _global_anime_girls_ | —                         | —        | —      | special dataset   |
+| _blocklists_         | —                         | —        | —      | blocklist entries |
 
 ## JSON Dumps
 
