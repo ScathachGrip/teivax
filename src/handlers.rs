@@ -62,7 +62,17 @@ pub async fn get_anime(
     };
     record(a);
     gauge!("process_uptime_seconds").set(state.started.elapsed().as_secs_f64());
-    (StatusCode::OK, Json(a.tags)).into_response()
+    match a.tags {
+        data::TagData::Flat(items) => (StatusCode::OK, Json(serde_json::json!(items))).into_response(),
+        data::TagData::Gif(ref items) => {
+            let wrapper = match a.id {
+                "data_gif" => serde_json::json!({"gif": items}),
+                "data_gif_nsfw" => serde_json::json!({"nsfw": items}),
+                _ => serde_json::to_value(items).expect("serialize"),
+            };
+            (StatusCode::OK, Json(wrapper)).into_response()
+        }
+    }
 }
 
 pub async fn get_blocklists() -> impl IntoResponse {
