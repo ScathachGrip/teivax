@@ -96,7 +96,7 @@ Managing tag registries across multiple Discord bots is a maintenance nightmare.
 │           ┌─────────┴─────────┐                                                                  │
 │           v                   v                                                                  │
 │  ┌────────────────┐   ┌────────────────┐                                                         │
-│  │    nikke.rs    │   │  arknights.rs  │  ... 18 more tag files                                  │
+│  │    nikke.rs    │   │  arknights.rs  │  ... 25 more tag files                                  │
 │  │    106 tags    │   │    77 tags     │                                                         │
 │  └────────────────┘   └────────────────┘                                                         │
 │                                                                                                  │
@@ -135,7 +135,7 @@ Managing tag registries across multiple Discord bots is a maintenance nightmare.
 │                                                                                                  │
 │  ┌────────────────────────────────────────────────────────────────────────────────────────────┐  │
 │  │                                   REGISTRY (compile-time)                                  │  │
-│  │  &[Anime; 18]                                                                              │  │
+│  │  &[Anime; 25]                                                                              │  │
 │  │  • id: &'static str                                                                        │  │
 │  │  • title: &'static str                                                                     │  │
 │  │  • provider: &'static str                                                                  │  │
@@ -233,30 +233,37 @@ cargo build
 
 Unknown ID returns `404 Not Found` with body `unknown anime: <id>`.
 
-## Supported Titles (18)
+## Supported Titles (25)
 
-| ID                   | Title                     | Provider | Type   | Entries           |
-| -------------------- | ------------------------- | -------- | ------ | ----------------- |
-| nikke                | Nikke                     | rule34   | tags   | 106               |
-| arknights            | Arknights                 | rule34   | tags   | 77                |
-| bluearchive          | Blue Archive              | rule34   | tags   | 110               |
-| azurlane             | Azur Lane                 | rule34   | tags   | 80                |
-| fgo                  | Fate/Grand Order          | rule34   | tags   | 151               |
-| genshin              | Genshin Impact            | rule34   | tags   | 146               |
-| genshin_danbooru     | Genshin Impact (Danbooru) | danbooru | tags   | 36                |
-| honkai_starrail      | Honkai: Star Rail         | rule34   | tags   | 65                |
-| girls_frontline      | Girls' Frontline          | rule34   | tags   | 46                |
-| naruto               | Naruto                    | rule34   | tags   | 30                |
-| bleach               | Bleach                    | rule34   | tags   | 31                |
-| vtubers              | VTubers                   | rule34   | tags   | 374               |
-| danbooru_sex         | Danbooru Sex Tags         | danbooru | tags   | 64                |
-| data_gif             | GIFs                      | others   | return | 30                |
-| data_gif_nsfw        | NSFW GIFs                 | others   | return | 8                 |
-| gif_sex              | GIF Sex Tags              | others   | tags   | 30                |
-| hentai_yandere       | Hentai Yandere Tags       | yandere  | tags   | 49                |
-| ai_sex               | AI Sex Tags               | others   | tags   | 3                 |
-| _global_anime_girls_ | —                         | —        | —      | special dataset   |
-| _blocklists_         | —                         | —        | —      | blocklist entries |
+| ID                  | Title                     | Provider | Type   | Entries           |
+| ------------------- | ------------------------- | -------- | ------ | ----------------- |
+| `genshin`           | Genshin Impact            | rule34   | tags   | 146               |
+| `fgo`               | Fate/Grand Order          | rule34   | tags   | 151               |
+| `nikke`             | Nikke                     | rule34   | tags   | 106               |
+| `arknights`         | Arknights                 | rule34   | tags   | 77                |
+| `bluearchive`       | Blue Archive              | rule34   | tags   | 110               |
+| `azurlane`          | Azur Lane                 | rule34   | tags   | 80                |
+| `genshin_danbooru`  | Genshin Impact (Danbooru) | danbooru | tags   | 36                |
+| `honkai_starrail`   | Honkai: Star Rail         | rule34   | tags   | 65                |
+| `girls_frontline`   | Girls' Frontline          | rule34   | tags   | 46                |
+| `naruto`            | Naruto                    | rule34   | tags   | 30                |
+| `bleach`            | Bleach                    | rule34   | tags   | 31                |
+| `vtubers`           | VTubers                   | rule34   | tags   | 374               |
+| `danbooru_sex`      | Danbooru Sex Tags         | danbooru | tags   | 64                |
+| `data_gif`          | GIFs                      | others   | return | 30                |
+| `data_gif_nsfw`     | NSFW GIFs                 | others   | return | 8                 |
+| `gif_sex`           | GIF Sex Tags              | others   | tags   | 30                |
+| `hentai_yandere`    | Hentai Yandere Tags       | yandere  | tags   | 49                |
+| `ai_sex`            | AI Sex Tags               | others   | tags   | 3                 |
+| `wuthering_waves`   | Wuthering Waves           | rule34   | tags   | 34                |
+| `zenless_zone_zero` | Zenless Zone Zero         | danbooru | tags   | 42                |
+| `uma_musume`        | Uma Musume                | rule34   | tags   | 60                |
+| `honkai_impact`     | Honkai Impact 3rd         | danbooru | tags   | 30                |
+| `one_piece`         | One Piece                 | rule34   | tags   | 8                 |
+| `league_of_legends` | League of Legends         | rule34   | tags   | 24                |
+| `persona`           | Persona                   | danbooru | tags   | 27                |
+| global_anime_girls  | —                         | —        | —      | special dataset   |
+| blocklists          | —                         | —        | —      | blocklist entries |
 
 ## JSON Dumps
 

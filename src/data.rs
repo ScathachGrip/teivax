@@ -17,6 +17,13 @@ pub mod hentai_yandere;
 pub mod ai_sex;
 pub mod gif_sex;
 pub mod blocklists;
+pub mod wuthering_waves;
+pub mod zenless_zone_zero;
+pub mod uma_musume;
+pub mod honkai_impact;
+pub mod one_piece;
+pub mod league_of_legends;
+pub mod persona;
 pub mod global_anime_girls;
 
 #[derive(Debug, Clone, Copy, serde::Serialize)]
@@ -79,6 +86,13 @@ pub const REGISTRY: &[Anime] = &[
     Anime { id: "hentai_yandere", title: "Hentai Yandere Tags", provider: "yandere", tags: TagData::Flat(hentai_yandere::TAGS) },
     Anime { id: "ai_sex", title: "AI Sex Tags", provider: "others", tags: TagData::Flat(ai_sex::TAGS) },
     Anime { id: "gif_sex", title: "GIF Sex Tags", provider: "others", tags: TagData::Flat(gif_sex::TAGS) },
+    Anime { id: "wuthering_waves", title: "Wuthering Waves", provider: "rule34", tags: TagData::Flat(wuthering_waves::TAGS) },
+    Anime { id: "zenless_zone_zero", title: "Zenless Zone Zero", provider: "danbooru", tags: TagData::Flat(zenless_zone_zero::TAGS) },
+    Anime { id: "uma_musume", title: "Uma Musume", provider: "rule34", tags: TagData::Flat(uma_musume::TAGS) },
+    Anime { id: "honkai_impact", title: "Honkai Impact 3rd", provider: "danbooru", tags: TagData::Flat(honkai_impact::TAGS) },
+    Anime { id: "one_piece", title: "One Piece", provider: "rule34", tags: TagData::Flat(one_piece::TAGS) },
+    Anime { id: "league_of_legends", title: "League of Legends", provider: "rule34", tags: TagData::Flat(league_of_legends::TAGS) },
+    Anime { id: "persona", title: "Persona", provider: "danbooru", tags: TagData::Flat(persona::TAGS) },
 ];
 
 pub fn by_id(id: &str) -> Option<&'static Anime> {
