@@ -1,0 +1,10 @@
+pub const TAGS: &[&str] = &[
+    "nami_(one_piece)",
+    "nico_robin",
+    "boa_hancock",
+    "yamato_(one_piece)",
+    "perona",
+    "uta_(one_piece)",
+    "nefertari_vivi",
+    "jewelry_bonney",
+];
