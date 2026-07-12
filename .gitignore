@@ -9,6 +9,8 @@
 Thumbs.db
 imageboards/*.ts
 
-## build
+## build & playground
 auto-commit.md
 build.cmd
+*.html
+playground/

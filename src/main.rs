@@ -7,13 +7,14 @@ use std::net::SocketAddr;
 use std::time::Instant;
 
 use axum::routing::get;
+use axum::response::Html;
 use axum::Router;
 use axum_prometheus::PrometheusMetricLayer;
 use tower_http::cors::CorsLayer;
 use tower_http::trace::TraceLayer;
 use tracing_subscriber::EnvFilter;
 
-use crate::data::REGISTRY;
+use crate::data::{REGISTRY, BLOCKLISTS, GLOBAL_ANIME_GIRLS};
 use crate::env::AppEnv;
 use crate::handlers::AppState;
 
@@ -58,8 +59,11 @@ async fn main() {
         .route("/", get(handlers::root))
         .route("/data", get(handlers::index))
         .route("/:id", get(handlers::get_anime))
+        .route("/global_anime_girls", get(handlers::get_global_anime_girls))
+        .route("/blocklists", get(handlers::get_blocklists))
         .route("/health", get(handlers::health))
         .route("/loadavg", get(handlers::loadavg))
+        .route("/playground", get(playground_handler))
         .layer(CorsLayer::permissive())
         .layer(TraceLayer::new_for_http())
         .layer(prom_layer)
@@ -85,6 +89,22 @@ async fn dump_json() {
     for anime in REGISTRY {
         let path = format!("json/{}.json", anime.id);
         let _ = dump_one(&path, anime.tags).await;
+    }
+    // dump global_anime_girls separately (different schema)
+    let girls_path = "json/global_anime_girls.json";
+    let start = std::time::Instant::now();
+    if let Ok(json) = serde_json::to_string_pretty(GLOBAL_ANIME_GIRLS) {
+        if tokio::fs::write(girls_path, json).await.is_ok() {
+            metrics::record_json_dump(girls_path, start.elapsed().as_secs_f64());
+        }
+    }
+    // dump blocklists (structured: array of {key, tags})
+    let blk_path = "json/blocklists.json";
+    let blk_start = std::time::Instant::now();
+    if let Ok(blk_json) = serde_json::to_string_pretty(BLOCKLISTS) {
+        if tokio::fs::write(blk_path, blk_json).await.is_ok() {
+            metrics::record_json_dump(blk_path, blk_start.elapsed().as_secs_f64());
+        }
     }
 }
 
@@ -115,5 +135,12 @@ fn fetch_server() -> String {
             Err(_) => "Local".to_string(),
         },
         Err(_) => "Local".to_string(),
+    }
+}
+
+async fn playground_handler() -> Html<String> {
+    match tokio::fs::read_to_string("playground/index.html").await {
+        Ok(html) => Html(html),
+        Err(_) => Html("Playground not generated. Run: cargo run --bin gen_playground".into()),
     }
 }

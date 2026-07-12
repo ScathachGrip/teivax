@@ -1,0 +1,4 @@
+[alias]
+dev = "run"
+lint = "clippy"
+release = "run --release --bin teivax"
