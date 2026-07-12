@@ -1,5 +1,4 @@
 <div align="center">
-<a href="https://scathachgrip.github.io/teivax/"><img width="500" src="src/resources/project/images/teivax-header.png" alt="teivax"></a>
 
 <h4 align="center">A high-performance decentralized for custom branding registry.</h4>
 <p align="center">
