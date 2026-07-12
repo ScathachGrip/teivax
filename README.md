@@ -1,11 +1,13 @@
 <div align="center">
+<a href="https://scathachgrip.github.io/teivax/"><img width="500" src="src/resources/project/images/teivax-header.png" alt="teivax"></a>
+
 <h4 align="center">A high-performance decentralized for custom branding registry.</h4>
 <p align="center">
 	<a href="https://github.com/scathachgrip/teivax/actions/workflows/playground.yml"><img src="https://github.com/ScathachGrip/teivax/actions/workflows/playground.yml/badge.svg"></a>
 	<a href="https://qlty.sh/gh/ScathachGrip/projects/teivax"><img src="https://qlty.sh/gh/ScathachGrip/projects/teivax/maintainability.svg" alt="Maintainability" /></a>
 </p>
 
-Powered by the axum web framework for async concurrency without garbage collection overhead. Exposes first-class Prometheus observability, mimalloc-accelerated allocation, and a compile-time static registry that never touches a database — just pure `&'static [&'static str]`.
+Powered by the axum web framework for async concurrency without garbage collection overhead. Exposes first-class Prometheus observability, mimalloc-accelerated allocation, and compile-time registry never breaks the codebase.
 
 <a href="https://scathachgrip.github.io/teivax">Playground</a> •
 <a href="https://github.com/scathachgrip/teivax/blob/master/CONTRIBUTING.md">Contributing</a> •
@@ -15,36 +17,37 @@ Powered by the axum web framework for async concurrency without garbage collecti
 
 ---
 
-<a href="https://scathachgrip.github.io/teivax/"><img align="right" src="src/resources/project/images/teivax.png" width="300"></a>
+<a href="https://scathachgrip.github.io/teivax/"><img align="right" src="src/resources/project/images/ganyu.png" width="300"></a>
 
 - [ScathachGrip/teivax](#)
-  - [The problem](#the-problem)
-  - [The solution](#the-solution)
+  - [The problems](#the-problems)
+  - [The solutions](#the-solutions)
   - [Architecture](#architecture)
-  - [Features](#features)
   - [Prerequisites](#prerequisites)
     - [Installation](#installation)
       - [Docker](#docker)
       - [Manual](#manual)
-    - [Tests](#tests)
-    - [Nhentai Guide](#nhentai-guide)
-  - [Playground](https://sinkaroid.github.io/jandapress)
+    - [API](#api)
+      - [`GET /data`](#get-data)
+      - [`GET /:id`](#get-id)
+    - [JSON Dumps](#json-dumps)
+    - [Running tests](#running-tests)
+  - [Playground](https://scathachgrip.github.io/teivax/)
     - [Routing](#playground)
-    - [Status response](#status-response)
     - [Observability](#observability)
     - [Stack](#stack)
+    - [Known Issues](#known-issues)
   - [Adding a new Data](#adding-a-new-data)
-  - [Pronunciation](#Pronunciation)
-  - [Client libraries](#client-libraries)
+  - [Pronunciation](#pronunciation)
   - [Legal](#legal)
 
 ## The Problems
 
-Managing tag registries across multiple Discord bots is a maintenance nightmare. When a new anime character drops, every bot project must be edited individually — update the list, rebuild, redeploy. Teams maintaining 5, 10, or 20 bots end up copy-pasting the same 100+ character array across repos, creating drift between deployments. One bot gets `"anis_(nikke)"` with correct formatting, another uses a stale alias. There is no single source of truth, no centralized versioning, and no way to propagate updates without touching each codebase by hand.
+Managing tag registries across multiple Discord bots is a maintenance nightmare. When a new character-series drops, every bot project must be edited individually — update the list, rebuild, redeploy. Teams maintaining 5, 10, or 20 bots end up copy-pasting the same 100+ character array across repos, creating drift between deployments. One bot gets `"sandrone_(genshin_impact)"`, `"lauma_(genshin_impact)"`, `"anis_(star)_(nikke)"`, and etc.. with correct formatting, another uses a stale alias. There is no single source of truth, no centralized versioning, and no way to propagate updates without touching each codebase by hand.
 
 ## The Solutions
 
-teivax decouples the tag registry from your bot code. Instead of embedding character lists in every project, point all your bots at a single HTTP endpoint. Add or update tags in one place — teivax — and every bot picks up the change on its next request. The registry is compile-time constant, served with sub-millisecond latency, and needs no database, no cache warming, and no runtime synchronization. One `cargo build` propagates new characters to every consumer.
+@ScathachGrip/teivax decouples the tag registry from all bot code. Instead of embedding character lists in every project, point all your bots at a single HTTP endpoint. Add or update tags in one place — teivax — and every bot picks up the change on its next request. The registry is compile-time constant, served with sub-millisecond latency, and needs no database, no cache warming, and no runtime synchronization. One `cargo build` propagates new characters to every consumer.
 
 ## Architecture
 
@@ -152,7 +155,24 @@ teivax decouples the tag registry from your bot code. Instead of embedding chara
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Quick Start
+## Prerequisites
+
+<table>
+  <td><b>NOTE:</b> Rust 1.96.0 or higher / or simply just use docker</td>
+</table>
+
+## Installation
+
+Rust toolchain with `cargo` is required. The build is self-contained — no external services, no database, no runtime config beyond env vars. Choose one of:
+
+### Docker
+
+```sh
+docker pull ghcr.io/scathachgrip/teivax:latest
+docker run -p 3000:3000 -d ghcr.io/scathachgrip/teivax:latest
+```
+
+### Manual
 
 ```bash
 cargo build
@@ -240,6 +260,10 @@ Unknown ID returns `404 Not Found` with body `unknown anime: <id>`.
 ## JSON Dumps
 
 On startup, the server writes `json/{id}.json` for each anime and `json/global_anime_girls.json`, `json/blocklists.json`. Best-effort — failures logged, not fatal.
+
+## Running tests
+
+You can check available tests on [`cargo/config.toml`](.cargo/config.toml).
 
 ## Playground
 
