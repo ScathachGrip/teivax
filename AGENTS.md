@@ -2,6 +2,22 @@
 
 > **Read this before doing anything.** This document is the single source of truth for working in this repo. Do not invent files, do not invent behavior, do not change conventions without asking.
 
+## 🔴 ABSOLUTE RULE: NEVER TOUCH GIT
+
+**YOU ARE FORBIDDEN FROM RUNNING ANY GIT COMMAND.** This includes:
+- `git add`, `git commit`, `git push`, `git pull`, `git merge`, `git rebase`
+- `git checkout`, `git branch`, `git tag`, `git config`
+- `git reset`, `git revert`, `git stash`, `git cherry-pick`
+
+**YOU MAY ONLY SUGGEST THE EXACT COMMAND IN CHAT FOR THE USER TO COPY-PASTE AND RUN MANUALLY.**
+
+> **Violation of this rule in past conversations caused branch corruption, lost commits, and extreme user frustration. Do not repeat this mistake.**
+
+## 🔴 "GIVE" vs "ASSIGN"
+
+- **"GIVE"** → **PRINT ONLY in chat.** Do NOT execute anything. Do NOT edit files. Do NOT run git. Just output text.
+- **"ASSIGN"** → Execute the action (e.g. run `git commit`). But still: **NO GIT COMMANDS EVER** — only suggest commands for the user to run manually.
+
 ## Project: teivax
 
 Rust + axum HTTP server. Serves anime character tag registries (Nikke, Arknights) as JSON.
