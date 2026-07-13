@@ -5,6 +5,7 @@
 ## 🔴 ABSOLUTE RULE: NEVER TOUCH GIT
 
 **YOU ARE FORBIDDEN FROM RUNNING ANY GIT COMMAND.** This includes:
+
 - `git add`, `git commit`, `git push`, `git pull`, `git merge`, `git rebase`
 - `git checkout`, `git branch`, `git tag`, `git config`
 - `git reset`, `git revert`, `git stash`, `git cherry-pick`
@@ -37,18 +38,18 @@ Rust + axum HTTP server. Serves anime character tag registries (Nikke, Arknights
 
 ## Stack
 
-| Concern | Crate | Version |
-|---|---|---|
-| HTTP server | `axum` | 0.7 |
-| Runtime | `tokio` | 1 (`macros`, `rt-multi-thread`, `fs`) |
-| Allocator | `mimalloc` | 0.1 (`extended` feature) |
-| Async metrics | `axum-prometheus` | 0.7 |
-| Metrics facade | `metrics` | 0.23 |
-| System info | `sysinfo` | 0.32 |
-| Serialization | `serde`, `serde_json` | 1 |
-| Logging | `tracing` + `tracing-subscriber` | 0.1 / 0.3 |
-| HTTP middleware | `tower-http` | 0.5 (`cors`, `trace`) |
-| Env loading | `dotenvy` | 0.15 |
+| Concern         | Crate                            | Version                               |
+| --------------- | -------------------------------- | ------------------------------------- |
+| HTTP server     | `axum`                           | 0.7                                   |
+| Runtime         | `tokio`                          | 1 (`macros`, `rt-multi-thread`, `fs`) |
+| Allocator       | `mimalloc`                       | 0.1 (`extended` feature)              |
+| Async metrics   | `axum-prometheus`                | 0.7                                   |
+| Metrics facade  | `metrics`                        | 0.23                                  |
+| System info     | `sysinfo`                        | 0.32                                  |
+| Serialization   | `serde`, `serde_json`            | 1                                     |
+| Logging         | `tracing` + `tracing-subscriber` | 0.1 / 0.3                             |
+| HTTP middleware | `tower-http`                     | 0.5 (`cors`, `trace`)                 |
+| Env loading     | `dotenvy`                        | 0.15                                  |
 
 ## Build & Run
 
@@ -70,12 +71,12 @@ cargo build
 
 ### Env vars
 
-| Var | Default | Notes |
-|---|---|---|
-| `PORT` | `3000` | TCP port to bind on `0.0.0.0` |
-| `RUST_LOG` | `info` | tracing-subscriber EnvFilter |
+| Var        | Default | Notes                         |
+| ---------- | ------- | ----------------------------- |
+| `PORT`     | `3000`  | TCP port to bind on `0.0.0.0` |
+| `RUST_LOG` | `info`  | tracing-subscriber EnvFilter  |
 
-`.env` is auto-bootstrapped from `.env.example` on first run by `env.rs::ensure_env_file()`. Do not call `dotenvy::dotenv()` directly; call `AppEnv::load()` instead.
+`.env` is auto-bootstrapped from `.env.schema` on first run by `env.rs::ensure_env_file()`. Do not call `dotenvy::dotenv()` directly; call `AppEnv::load()` instead.
 
 ## File Layout
 
@@ -85,7 +86,7 @@ teivax/
 ├── README.md              — user-facing docs (if any)
 ├── Cargo.toml             — dependencies, edition 2021
 ├── build.cmd              — Windows MSVC wrapper
-├── .env.example           — env template (PORT, RUST_LOG)
+├── .env.schema           — env template (PORT, RUST_LOG)
 ├── .env                   — gitignored, auto-created
 ├── .gitignore             — see "Git" section
 ├── imageboards/           — reference TS data, NOT compiled (read-only)
@@ -124,10 +125,10 @@ teivax/
 
 - `pub struct AppEnv { pub port: u16 }`
 - `pub fn AppEnv::load() -> Self`
-  1. `ensure_env_file()` — if `.env` missing, copy from `.env.example`
+  1. `ensure_env_file()` — if `.env` missing, copy from `.env.schema`
   2. `dotenvy::dotenv()` — load vars from `.env` (no-op if missing)
   3. Parse `PORT` (fallback 3000)
-- `fn ensure_env_file()` — copies `.env.example` to `.env` if `.env` does not exist; logs `created .env from .env.example`
+- `fn ensure_env_file()` — copies `.env.schema` to `.env` if `.env` does not exist; logs `created .env from .env.schema`
 
 ### `src/handlers.rs`
 
@@ -237,6 +238,7 @@ Returns mimalloc stats as JSON. Server-side only (no CORS).
 ## Conventions
 
 ### Data
+
 - **`&'static str` everywhere.** No `String` in REGISTRY. No runtime allocation for tag data.
 - **New anime:**
   1. Create `src/data/<id>.rs` with `pub const TAGS: &[&str] = &[ ... ];`
@@ -245,6 +247,7 @@ Returns mimalloc stats as JSON. Server-side only (no CORS).
 - **Provider** is a static label (e.g. `"rule34"`). It is not parsed, not derived, hardcoded. The actual imageboard is consumed by the sibling TS project.
 
 ### Style
+
 - `use` statements grouped: std, then external crates, then `crate::`
 - Snake case functions, PascalCase types, SCREAMING_SNAKE consts
 - No `unwrap()` outside `main()` startup; use `?` or `expect("message")` at trust boundaries
@@ -252,11 +255,13 @@ Returns mimalloc stats as JSON. Server-side only (no CORS).
 - No comments explaining what code does; only why
 
 ### Routing
+
 - `data_router` — public endpoints, CORS permissive, tracing layer, prom layer, state
 - `metrics_router` — server-side scrapers, no CORS
 - Routes are flat; do not nest
 
 ### Git
+
 - `Cargo.lock` **must** be committed (binary crate — reproducible builds)
 - `.env` is gitignored
 - `imageboards/*.ts` is **NOT** gitignored (kept for cross-reference). They are not read at build or runtime.
@@ -314,7 +319,8 @@ Returns mimalloc stats as JSON. Server-side only (no CORS).
 
 ### Change the port
 
-Edit `.env` (or create from `.env.example`):
+Edit `.env` (or create from `.env.schema`):
+
 ```
 PORT=8080
 ```
