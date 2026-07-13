@@ -8,7 +8,6 @@ pub const TAGS: &[&str] = &[
     "super_creek_(umamusume)",
     "rice_shower_(umamusume)",
     "silence_suzuka_(umamusume)",
-    "trainer_(umamusume)",
     "oguri_cap_(umamusume)",
     "manhattan_cafe_(umamusume)",
     "kitasan_black_(umamusume)",

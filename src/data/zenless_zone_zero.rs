@@ -35,7 +35,6 @@ pub const TAGS: &[&str] = &[
     "promeia_(zenless_zone_zero)",
     "norma_hollowell",
     "dialyn_(zenless_zone_zero)",
-    "aria_(robot)_(zenless_zone_zero)",
     "sweety_(zenless_zone_zero)",
     "soldier_11_(zenless_zone_zero)",
     "lucia_elowen",
