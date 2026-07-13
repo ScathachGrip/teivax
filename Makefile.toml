@@ -1,0 +1,39 @@
+[env]
+CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY = "."
+
+[tasks.qlty]
+command = "qlty"
+args = ["check"]
+
+[tasks.qlty-smells]
+command = "qlty"
+args = ["smells"]
+
+[tasks.lint]
+command = "cargo"
+args = ["clippy", "--all-targets", "--", "-D", "warnings"]
+
+[tasks.fmt]
+command = "cargo"
+args = ["fmt", "--all"]
+
+[tasks.check]
+command = "cargo"
+args = ["check"]
+
+[tasks.build]
+command = "cargo"
+args = ["build"]
+
+[tasks.test]
+command = "cargo"
+args = ["test"]
+
+[tasks.run]
+command = "cargo"
+args = ["run", "--bin", "teivax"]
+
+[tasks.check-entries]
+description = "Run audit: cargo make check-entries <name>"
+command = "cargo"
+args = ["run", "--example", "check_${CARGO_MAKE_TASK_ARGS}"]

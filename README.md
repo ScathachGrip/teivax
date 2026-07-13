@@ -189,7 +189,7 @@ cargo build
 | `PORT`     | `3000`  | TCP bind on `0.0.0.0` |
 | `RUST_LOG` | `info`  | tracing EnvFilter     |
 
-`.env` auto-created from `.env.example` on first run.
+`.env` auto-created from `.env.schema` on first run.
 
 ## API
 
@@ -235,35 +235,35 @@ Unknown ID returns `404 Not Found` with body `unknown anime: <id>`.
 
 ## Supported Titles (25)
 
-| ID                  | Title                     | Provider | Type   | Entries           |
-| ------------------- | ------------------------- | -------- | ------ | ----------------- |
-| `genshin`           | Genshin Impact            | rule34   | tags   | 79                |
-| `fgo`               | Fate/Grand Order          | rule34   | tags   | 118               |
-| `nikke`             | Nikke                     | rule34   | tags   | 106               |
-| `arknights`         | Arknights                 | rule34   | tags   | 70                |
-| `bluearchive`       | Blue Archive              | rule34   | tags   | 73                |
-| `azurlane`          | Azur Lane                 | rule34   | tags   | 66                |
-| `genshin_danbooru`  | Genshin Impact (Danbooru) | danbooru | tags   | 36                |
-| `honkai_starrail`   | Honkai: Star Rail         | rule34   | tags   | 50                |
-| `girls_frontline`   | Girls' Frontline          | rule34   | tags   | 39                |
-| `naruto`            | Naruto                    | rule34   | tags   | 30                |
-| `bleach`            | Bleach                    | rule34   | tags   | 31                |
-| `vtubers`           | VTubers                   | rule34   | tags   | 374               |
-| `danbooru_sex`      | Danbooru Sex Tags         | danbooru | tags   | 64                |
-| `data_gif`          | GIFs                      | others   | gif    | 2792              |
-| `data_gif_nsfw`     | NSFW GIFs                 | others   | gif    | 5194              |
-| `gif_sex`           | GIF Sex Tags              | others   | tags   | 30                |
-| `hentai_yandere`    | Hentai Yandere Tags       | yandere  | tags   | 49                |
-| `ai_sex`            | AI Sex Tags               | others   | tags   | 3                 |
-| `wuthering_waves`   | Wuthering Waves           | rule34   | tags   | 34                |
-| `zenless_zone_zero` | Zenless Zone Zero         | danbooru | tags   | 42                |
-| `uma_musume`        | Uma Musume                | rule34   | tags   | 59                |
-| `honkai_impact`     | Honkai Impact 3rd         | danbooru | tags   | 27                |
-| `one_piece`         | One Piece                 | rule34   | tags   | 8                 |
-| `league_of_legends` | League of Legends         | rule34   | tags   | 23                |
-| `persona`           | Persona                   | danbooru | tags   | 21                |
-| global_anime_girls  | —                         | —        | —      | special dataset   |
-| blocklists          | —                         | —        | —      | blocklist entries |
+| ID                  | Title                     | Provider | Type | Entries           |
+| ------------------- | ------------------------- | -------- | ---- | ----------------- |
+| `genshin`           | Genshin Impact            | rule34   | tags | 79                |
+| `fgo`               | Fate/Grand Order          | rule34   | tags | 118               |
+| `nikke`             | Nikke                     | rule34   | tags | 106               |
+| `arknights`         | Arknights                 | rule34   | tags | 70                |
+| `bluearchive`       | Blue Archive              | rule34   | tags | 73                |
+| `azurlane`          | Azur Lane                 | rule34   | tags | 66                |
+| `genshin_danbooru`  | Genshin Impact (Danbooru) | danbooru | tags | 36                |
+| `honkai_starrail`   | Honkai: Star Rail         | rule34   | tags | 50                |
+| `girls_frontline`   | Girls' Frontline          | rule34   | tags | 39                |
+| `naruto`            | Naruto                    | rule34   | tags | 30                |
+| `bleach`            | Bleach                    | rule34   | tags | 31                |
+| `vtubers`           | VTubers                   | danbooru | tags | 196               |
+| `danbooru_sex`      | Danbooru Sex Tags         | danbooru | tags | 64                |
+| `data_gif`          | GIFs                      | others   | gif  | 2792              |
+| `data_gif_nsfw`     | NSFW GIFs                 | others   | gif  | 5194              |
+| `gif_sex`           | GIF Sex Tags              | others   | tags | 30                |
+| `hentai_yandere`    | Hentai Yandere Tags       | yandere  | tags | 49                |
+| `ai_sex`            | AI Sex Tags               | others   | tags | 3                 |
+| `wuthering_waves`   | Wuthering Waves           | rule34   | tags | 34                |
+| `zenless_zone_zero` | Zenless Zone Zero         | danbooru | tags | 42                |
+| `uma_musume`        | Uma Musume                | rule34   | tags | 59                |
+| `honkai_impact`     | Honkai Impact 3rd         | danbooru | tags | 27                |
+| `one_piece`         | One Piece                 | rule34   | tags | 8                 |
+| `league_of_legends` | League of Legends         | rule34   | tags | 23                |
+| `persona`           | Persona                   | danbooru | tags | 21                |
+| global_anime_girls  | —                         | —        | —    | special dataset   |
+| blocklists          | —                         | —        | —    | blocklist entries |
 
 ## JSON Dumps
 
@@ -271,7 +271,84 @@ On startup, the server writes `json/{id}.json` for each anime and `json/global_a
 
 ## Running tests
 
-You can check available tests on [`cargo/config.toml`](.cargo/config.toml).
+You can check available tests on [`cargo/config.toml`](.cargo/config.toml) and [`Makefile.toml`](Makefile.toml).
+
+### Audit checks
+
+Audit tag registries against live API post counts:
+
+```bash
+cargo make check-entries <name>
+```
+
+Examples:
+
+```bash
+# danbooru-provider
+cargo make check-entries genshin_danbooru
+cargo make check-entries vtubers
+cargo make check-entries danbooru_sex
+cargo make check-entries honkai_impact
+cargo make check-entries zenless
+cargo make check-entries persona
+
+# rule34-provider
+cargo make check-entries genshin
+cargo make check-entries fgo
+cargo make check-entries nikke
+cargo make check-entries arknights
+cargo make check-entries bluearchive
+cargo make check-entries azurlane
+cargo make check-entries honkai_starrail
+cargo make check-entries girls_frontline
+cargo make check-entries naruto
+cargo make check-entries bleach
+cargo make check-entries uma_musume
+cargo make check-entries one_piece
+cargo make check-entries league_of_legends
+cargo make check-entries wuthering_waves
+```
+
+To ensure nasty tags or ambiguous wildcard exists, manual clean up is required.  
+This will surface a new file `target/check_<name>_output.txt` example:
+
+```txt
+TAG                                                          POST_COUNT
+---------------------------------------------------------------------------
+raiden_shogun                                                23755
+ganyu_(genshin_impact)                                       15595
+yae_miko                                                     14832
+lumine_(genshin_impact)                                      14759
+mona_(genshin_impact)                                        13786
+hu_tao_(genshin_impact)                                      12982
+eula_(genshin_impact)                                        10210
+
+=== SUMMARY ===
+Total: 79
+Total posts: 258407
+
+Output: E:\Ferris\teivax\target\check_genshin_output.txt
+[cargo-make] INFO - Build Done in 110.88 seconds.
+```
+
+### Build tools
+
+| Command                           | Description                              |
+| --------------------------------- | ---------------------------------------- |
+| `cargo build`                     | Build debug                              |
+| `cargo make build`                | Same, via cargo-make                     |
+| `cargo dev`                       | `cargo run` alias                        |
+| `cargo make run`                  | Run server binary                        |
+| `cargo release`                   | `cargo run --release --bin teivax` alias |
+| `cargo make check`                | `cargo check`                            |
+| `cargo make lint`                 | Clippy with deny warnings                |
+| `cargo make fmt`                  | Format all                               |
+| `cargo make test`                 | Run tests                                |
+| `cargo make qlty`                 | Run Qlty check (linters + analyzers)     |
+| `cargo make qlty-smells`          | Qlty code smells only                    |
+| `cargo make check-entries <name>` | Audit tag registry live counts           |
+
+See [`.cargo/config.toml`](.cargo/config.toml) for aliases and [`Makefile.toml`](Makefile.toml) for cargo-make tasks.
 
 ## Playground
 
