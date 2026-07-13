@@ -189,7 +189,7 @@ cargo build
 | `PORT`     | `3000`  | TCP bind on `0.0.0.0` |
 | `RUST_LOG` | `info`  | tracing EnvFilter     |
 
-`.env` auto-created from `.env.example` on first run.
+`.env` auto-created from `.env.schema` on first run.
 
 ## API
 

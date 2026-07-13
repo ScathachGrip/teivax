@@ -23,13 +23,13 @@ fn ensure_env_file() {
     if env.exists() {
         return;
     }
-    let example = Path::new(".env.example");
+    let example = Path::new(".env.schema");
     if !example.exists() {
         return;
     }
     if let Ok(src) = std::fs::read_to_string(example) {
         if std::fs::write(env, src).is_ok() {
-            tracing::info!("created .env from .env.example");
+            tracing::info!("created .env from .env.schema");
         }
     }
 }
