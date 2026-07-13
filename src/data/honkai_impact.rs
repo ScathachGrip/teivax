@@ -12,7 +12,6 @@ pub const TAGS: &[&str] = &[
     "mobius_(honkai_impact)",
     "durandal_(honkai_impact)",
     "murata_himeko",
-    "homu_(honkai_impact)",
     "aponia",
     "griseo",
     "rozaliya_olenyeva",
@@ -26,7 +25,5 @@ pub const TAGS: &[&str] = &[
     "thelema_nutriscu",
     "li_sushang",
     "senadina",
-    "project_bunny",
     "raven_(honkai_impact)",
-    "yanning",
 ];
