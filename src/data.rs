@@ -79,7 +79,7 @@ pub const REGISTRY: &[Anime] = &[
     Anime { id: "girls_frontline", title: "Girls' Frontline", provider: "rule34", tags: TagData::Flat(girls_frontline::TAGS) },
     Anime { id: "naruto", title: "Naruto", provider: "rule34", tags: TagData::Flat(naruto::TAGS) },
     Anime { id: "bleach", title: "Bleach", provider: "rule34", tags: TagData::Flat(bleach::TAGS) },
-    Anime { id: "vtubers", title: "VTubers", provider: "rule34", tags: TagData::Flat(vtubers::TAGS) },
+    Anime { id: "vtubers", title: "VTubers", provider: "danbooru", tags: TagData::Flat(vtubers::TAGS) },
     Anime { id: "danbooru_sex", title: "Danbooru Sex Tags", provider: "danbooru", tags: TagData::Flat(danbooru_sex::TAGS) },
     Anime { id: "data_gif", title: "GIFs", provider: "others", tags: TagData::Gif(data_gif::DATAGIF) },
     Anime { id: "data_gif_nsfw", title: "NSFW GIFs", provider: "others", tags: TagData::Gif(data_gif_nsfw::DATAGIFNSFW) },

@@ -1,376 +1,198 @@
 pub const TAGS: &[&str] = &[
-    "a-chan_(hololive)",
-    "airani_iofifteen",
-    "akai_haato",
-    "aki_rosenthal",
-    "amane_kanata",
-    "amano_pikamee",
-    "amatsuka_uto",
-    "amemiya_nazuna",
-    "ankimo_(tokino_sora)",
-    "anya_melfissa",
-    "ayunda_risu",
-    "bao_(vtuber)",
-    "bsapricot_(vtuber)",
-    "ceres_fauna",
-    "gawr_gura",
-    "hakos_baelz",
-    "himemori_luna",
-    "hoshimachi_suisei",
-    "houshou_marine",
-    "inugami_korone",
-    "ironmouse",
-    "irys_(hololive)",
-    "kanae_(nijisanji)",
-    "kiryu_coco",
-    "kson",
-    "kureiji_ollie",
-    "kushizaki_(vtuber)",
-    "kuzuha_(nijisanji)",
-    "melody_(projektmelody)",
-    "minato_aqua",
-    "moona_hoshinova",
-    "mori_calliope",
-    "murasaki_shion",
-    "nakiri_ayame",
-    "nanashi_mumei",
-    "natsuiro_matsuri",
-    "nekomata_okayu",
-    "ninomae_ina'nis",
-    "nyatasha_nyanners",
-    "ookami_mio",
-    "oozora_subaru",
-    "ouro_kronii",
-    "pavolia_reine",
-    "sakura_miko",
-    "saruei_(vtuber)",
-    "shigure_ui_(vtuber)",
-    "shirakami_fubuki",
-    "shiranui_flare",
-    "shirogane_noel",
-    "shylily",
-    "silvervale",
-    "snuffy_(vtuber)",
-    "takanashi_kiara",
-    "tokino_sora",
-    "tokoyami_towa",
-    "tsukumo_sana",
-    "tsunomaki_watame",
-    "uruha_rushia",
-    "usada_pekora",
-    "vei_(vtuber)",
-    "vestia_zeta",
-    "watson_amelia",
-    "yozora_mel",
-    "yuzuki_choco",
-    "shishiro_botan",
-    "yukihana_lamy",
-    "mano_aloe",
-    "omaru_polka",
-    "roboco-san",
-    "momosuzu_nene",
-    "nerissa_ravencroft",
-    "sakamata_chloe",
-    "gawr_gura_(1st_costume)",
-    "shiori_novella",
-    "houshou_marine_(1st_costume)",
-    "mococo_abyssgard",
-    "fuwawa_abyssgard",
-    "la+_darknesss",
-    "hakui_koyori",
-    "usada_pekora_(1st_costume)",
-    "raora_panthera",
-    "koseki_bijou",
-    "shirakami_fubuki_(1st_costume)",
-    "kazama_iroha",
-    "takodachi_(ninomae_ina'nis)",
-    "don-chan_(usada_pekora)",
-    "azki_(hololive)",
-    "ouro_kronii_(1st_costume)",
-    "watson_amelia_(1st_costume)",
-    "nanashi_mumei_(1st_costume)",
-    "takane_lui",
-    "mori_calliope_(1st_costume)",
-    "gigi_murin",
-    "inugami_korone_(1st_costume)",
-    "nekomata_okayu_(1st_costume)",
-    "sakamata_chloe_(1st_costume)",
-    "shiori_novella_(1st_costume)",
-    "hoshimachi_suisei_(1st_costume)",
-    "cecilia_immergreen",
-    "la+_darknesss_(1st_costume)",
-    "pekomama",
-    "houshou_marine_(summer)",
-    "tokoyami_towa_(1st_costume)",
-    "hakos_baelz_(1st_costume)",
-    "mococo_abyssgard_(1st_costume)",
-    "fuwawa_abyssgard_(1st_costume)",
-    "yukihana_lamy_(1st_costume)",
-    "elizabeth_rose_bloodflame",
-    "hakui_koyori_(1st_costume)",
-    "kazama_iroha_(1st_costume)",
-    "shishiro_botan_(1st_costume)",
-    "sameko_saba",
-    "neuro-sama",
-    "mint_fantome",
-    "dokibird",
-    "zentreya",
-    "nimi_nightmare",
-    "shigure_ui_(1st_costume)_(vtuber)",
-    "yuuki_sakuna",
-    "neuro-sama_(1st_costume)",
-    "sameko_saba_(1st_costume)",
-    "vedal987",
-    "fallenshadow",
-    "shigure_ui_(young)_(vtuber)",
-    "limealicious",
-    "bao_the_whale",
-    "dooby",
-    "mint_fantome_(minto_2.0)",
-    "zentreya_(dragon)",
-    "akuma_nihmune",
-    "dokibird_(bounty_hunter)",
-    "dokibird_(retro_doki)",
-    "shyrei_faolan",
-    "akumi_(yoclesh)",
-    "kaniki_(sameko_saba)",
-    "matara_kan",
-    "annytf",
-    "juniper_actias",
-    "camila_(vtuber)",
-    "tomari_mari",
-    "nachoneko",
-    "sinder_(vtuber)",
-    "tomoe_umari",
-    "yuuki_sakuna_(1st_costume)",
-    "shoto_(vtuber)",
-    "rurudo_lion",
-    "cottontail_(vtuber)",
-    "dragoon_(dokibird)",
-    "naplings_(nimi_nightmare)",
-    "wisps_(mint_fantome)",
-    "amano_nene_(vtuber)",
-    "filian_(vtuber)",
-    "delutaya",
-    "akami_karubi",
-    "dooby_(1st_costume)",
-    "yuuki_sakuna_(3rd_costume)",
-    "mikeneko_(vtuber)",
-    "monarch_amalee",
-    "haruka_karibu",
-    "crelly",
-    "shigure_ui_(summer_uniform)_(vtuber)",
-    "bon_(vtuber)",
-    "shylily_(bikini)",
-    "layna_lazar",
-    "kagura_nana",
-    "shylily_(1st_costume)",
-    "sakurada_hane",
-    "fallenshadow_(1st_costume)",
-    "pochimaru_(vtuber)",
-    "megalodon_(vtuber)",
-    "mugen_mochi",
-    "rurudo_lion_(1st_costume)",
-    "lincoro",
-    "henya_the_genius",
-    "apricot_the_lich",
-    "zentreya_(cyborg)",
-    "general_geega",
-    "souchou",
-    "henya_the_genius_(1st_costume)",
-    "michi_mochievee",
-    "amemiya_nazuna_(1st_costume)",
-    "vei_(4th_costume)_(vtuber)",
-    "zentreya_(dragon)_(cowboy_bikini)",
-    "ange_katrina",
-    "lize_helesta",
-    "tsukino_mito",
-    "makaino_ririmu",
-    "inui_toko",
-    "shiina_yuika",
-    "higuchi_kaede",
-    "hoshikawa_sara",
-    "elira_pendora",
-    "selen_tatsuki",
-    "suzuhara_lulu",
-    "tsukino_mito_(1st_costume)",
-    "sukoya_kana",
-    "hyakumantenbara_salome",
-    "sasaki_saku",
-    "ange_katrina_(1st_costume)",
-    "furen_e_lustario",
-    "amamiya_kokoro",
-    "pomu_rainpuff",
-    "enna_alouette",
-    "sister_claire",
-    "kenmochi_touya",
-    "yorumi_rena",
-    "finana_ryugu",
-    "sebastian_piyodore",
-    "suzuhara_lulu_(1st_costume)",
-    "nui_sociere",
-    "uzuki_kou",
-    "shizuka_rin",
-    "petra_gurin",
-    "inui_toko_(1st_costume)",
-    "takamiya_rion",
-    "shirayuki_tomoe",
-    "hakase_fuyuki",
-    "hyakumantenbara_salome_(1st_costume)",
-    "millie_parfait",
-    "honma_himawari",
-    "rindou_mikoto",
-    "lain_paterson",
-    "higuchi_kaede_(1st_costume)",
-    "lize_helesta_(1st_costume)",
-    "kuramochi_meruto",
-    "sasaki_saku_(1st_costume)",
-    "rosemi_lovelock",
-    "ike_eveland",
-    "vox_akuma",
-    "ishigami_nozomi",
-    "ars_almal",
-    "morinaka_kazaki",
-    "makaino_ririmu_(4th_costume)",
-    "sukoya_kana_(1st_costume)",
-    "hoshikawa_sara_(1st_costume)",
-    "fuwa_minato",
-    "hoshirube_sho",
-    "suo_sango",
-    "sister_claire_(1st_costume)",
-    "luca_kaneshiro",
-    "reimu_endou",
-    "nina_kosaka",
-    "lauren_iroas",
-    "elira_pendora_(1st_costume)",
-    "shu_yamino",
-    "matsukai_mao",
-    "debitto_(makaino_ririmu)",
-    "mashiro_meme",
-    "mononobe_alice",
-    "mysta_rias",
-    "lain_paterson_(1st_costume)",
-    "dola_(nijisanji)",
-    "igarashi_rika",
-    "shioriha_ruri",
-    "maria_marionette",
-    "kenmochi_touya_(1st_costume)",
-    "lize_helesta_(school_uniform)",
-    "ratna_petit",
-    "saegusa_akina",
-    "fushimi_gaku",
-    "scarle_yonaguni",
-    "koshimizu_toru",
-    "sonny_brisko",
-    "pomu_rainpuff_(1st_costume)",
-    "yamagami_karuta",
-    "ryuushen",
-    "watarai_hibari",
-    "hanabatake_chaika",
-    "kuzuha_(1st_costume)_(nijisanji)",
-    "elu_(nijisanji)",
-    "yuuhi_riri",
-    "yashiro_kizuku",
-    "debidebi_debiru",
-    "kagami_hayato",
-    "leos_vincent",
-    "ishigami_nozomi_(1st_costume)",
-    "yumeoi_kakeru",
-    "meloco_kyoran",
-    "yuuki_chihiro",
-    "sophia_valentine",
-    "yuzuki_roa",
-    "alban_knox",
-    "pikl_(elira_pendora)",
-    "machita_chima",
-    "banken_(inui_toko)",
-    "fura_kanato",
-    "uki_violeta",
-    "belmond_banderas",
-    "warabeda_meiji",
-    "emma_august",
-    "kaburaki_roco",
-    "ibrahim_(nijisanji)",
-    "gundou_mirei",
-    "shishido_akari",
-    "murakumo_kagetsu",
-    "amemori_sayo",
-    "ex_albio",
-    "koyanagi_rou",
-    "nishizono_chigusa",
-    "mayuzumi_kai",
-    "inami_rai",
-    "doppio_dropscythe",
-    "suzuka_utako",
-    "nun_bora",
-    "ienaga_mugi",
-    "otogibara_era",
-    "fulgur_ovid",
-    "ren_zotto",
-    "yang_nari",
-    "kaida_haru",
-    "kitakoji_hisui",
-    "suzuki_masaru",
-    "aiba_uiha",
-    "kotoka_torahime",
-    "fumino_tamaki",
-    "akabane_youko",
-    "oliver_evans",
-    "levi_elipha",
-    "aia_amare",
-    "moira_(nijisanji)",
-    "fumi_(nijisanji)",
-    "hibachi_mana",
-    "usami_rito",
-    "joe_rikiichi",
-    "seraph_dazzlegarden",
-    "ponto_nei",
-    "saiki_ittetsu",
-    "lunlun_(nijisanji)",
-    "nanase_suzuna",
-    "shikinagi_akira",
-    "kurusu_natsume",
-    "naraka_(nijisanji)",
-    "saotome_berry",
-    "kirara_tamako",
-    "ushimi_ichigo",
-    "mika_melatika",
-    "tachibana_hinano",
-    "aizawa_ema",
-    "ichinose_uruha",
-    "yakumo_beni",
-    "nekota_tsuna",
-    "kurumi_noah",
-    "kaga_sumire",
-    "shinomiya_runa",
-    "komori_met",
-    "asumi_sena",
-    "tosaki_mimi",
-    "kisaragi_ren_(vspo!)",
-    "kaga_nazuna",
-    "hanabusa_lisa",
-    "kaminari_qpi",
-    "shiranami_ramune",
-    "yano_kuromu",
-    "tsumugi_kokage",
-    "nekota_tsuna_(1st_costume)",
-    "sendo_yuuhi",
-    "ichinose_uruha_(6th_costume)",
-    "choya_hanabi",
-    "pipkin_pippa",
-    "tenma_maemi",
-    "erina_makina",
-    "amanogawa_shiina",
-    "kaneko_lumi",
-    "komachi_panko",
-    "clio_aite",
-    "jelly_hoshiumi",
-    "fujikura_uruka",
-    "chisaka_airi",
-    "dizzy_dokuro",
-    "himemiya_rie",
-    "pipkin_pippa_(1st_costume)",
-    "ember_amane",
-    "marimari_(vtuber)",
-    "rinkou_ashelia",
+    "lain_paterson_(1st_costume)", // 602
+    "mysta_rias", // 616
+    "mononobe_alice", // 630
+    "komori_met", // 634
+    "amano_pikamee", // 639
+    "mashiro_meme", // 640
+    "debitto_(makaino_ririmu)", // 650
+    "matsukai_mao", // 654
+    "pipkin_pippa", // 654
+    "shu_yamino", // 655
+    "dooby", // 658
+    "elira_pendora_(1st_costume)", // 668
+    "lauren_iroas", // 673
+    "nina_kosaka", // 678
+    "bao_the_whale", // 685
+    "reimu_endou", // 698
+    "limealicious", // 702
+    "luca_kaneshiro", // 727
+    "melody_(projektmelody)", // 731
+    "sister_claire_(1st_costume)", // 750
+    "suo_sango", // 755
+    "hoshirube_sho", // 757
+    "fuwa_minato", // 760
+    "hoshikawa_sara_(1st_costume)", // 764
+    "sukoya_kana_(1st_costume)", // 770
+    "morinaka_kazaki", // 772
+    "makaino_ririmu_(4th_costume)", // 772
+    "kson", // 775
+    "shinomiya_runa", // 785
+    "zentreya_(dragon)", // 789
+    "silvervale", // 796
+    "mint_fantome_(minto_2.0)", // 805
+    "vedal987", // 809
+    "sameko_saba_(1st_costume)", // 820
+    "ars_almal", // 832
+    "ishigami_nozomi", // 846
+    "vox_akuma", // 847
+    "ike_eveland", // 859
+    "rosemi_lovelock", // 866
+    "sasaki_saku_(1st_costume)", // 871
+    "kuramochi_meruto", // 888
+    "shigure_ui_(young)_(vtuber)", // 899
+    "lize_helesta_(1st_costume)", // 899
+    "fallenshadow", // 913
+    "a-chan_(hololive)", // 932
+    "higuchi_kaede_(1st_costume)", // 938
+    "lain_paterson", // 951
+    "rindou_mikoto", // 960
+    "honma_himawari", // 964
+    "millie_parfait", // 965
+    "kaga_sumire", // 981
+    "hyakumantenbara_salome_(1st_costume)", // 983
+    "airani_iofifteen", // 991
+    "hakase_fuyuki", // 1012
+    "shirayuki_tomoe", // 1025
+    "kurumi_noah", // 1036
+    "nekota_tsuna", // 1048
+    "yakumo_beni", // 1082
+    "takamiya_rion", // 1083
+    "anya_melfissa", // 1112
+    "inui_toko_(1st_costume)", // 1114
+    "shigure_ui_(1st_costume)_(vtuber)", // 1152
+    "shylily", // 1163
+    "petra_gurin", // 1164
+    "yozora_mel", // 1176
+    "shizuka_rin", // 1178
+    "uzuki_kou", // 1203
+    "nui_sociere", // 1210
+    "ironmouse", // 1212
+    "vestia_zeta", // 1217
+    "yuuki_sakuna", // 1219
+    "ayunda_risu", // 1246
+    "neuro-sama_(1st_costume)", // 1262
+    "suzuhara_lulu_(1st_costume)", // 1301
+    "sebastian_piyodore", // 1322
+    "aizawa_ema", // 1350
+    "nimi_nightmare", // 1368
+    "finana_ryugu", // 1380
+    "ichinose_uruha", // 1383
+    "yorumi_rena", // 1391
+    "roboco-san", // 1427
+    "zentreya", // 1429
+    "kenmochi_touya", // 1436
+    "sister_claire", // 1437
+    "kanae_(nijisanji)", // 1447
+    "enna_alouette", // 1546
+    "pomu_rainpuff", // 1554
+    "amamiya_kokoro", // 1563
+    "aki_rosenthal", // 1570
+    "furen_e_lustario", // 1679
+    "ange_katrina_(1st_costume)", // 1687
+    "tachibana_hinano", // 1688
+    "sasaki_saku", // 1698
+    "hyakumantenbara_salome", // 1716
+    "sukoya_kana", // 1754
+    "dokibird", // 1758
+    "pavolia_reine", // 1819
+    "kuzuha_(nijisanji)", // 1834
+    "neuro-sama", // 1840
+    "tsukumo_sana", // 1859
+    "tsukino_mito_(1st_costume)", // 1949
+    "suzuhara_lulu", // 1955
+    "kazama_iroha_(1st_costume)", // 1963
+    "hakui_koyori_(1st_costume)", // 2087
+    "selen_tatsuki", // 2087
+    "shishiro_botan_(1st_costume)", // 2106
+    "hakos_baelz_(1st_costume)", // 2123
+    "tokoyami_towa_(1st_costume)", // 2129
+    "moona_hoshinova", // 2147
+    "mint_fantome", // 2182
+    "fuwawa_abyssgard_(1st_costume)", // 2215
+    "yukihana_lamy_(1st_costume)", // 2235
+    "mococo_abyssgard_(1st_costume)", // 2311
+    "houshou_marine_(summer)", // 2317
+    "tokino_sora", // 2341
+    "elizabeth_rose_bloodflame", // 2347
+    "kureiji_ollie", // 2354
+    "pekomama", // 2451
+    "elira_pendora", // 2454
+    "sameko_saba", // 2477
+    "hoshikawa_sara", // 2505
+    "higuchi_kaede", // 2581
+    "la+_darknesss_(1st_costume)", // 2587
+    "yuzuki_choco", // 2709
+    "himemori_luna", // 2735
+    "shiina_yuika", // 2763
+    "hoshimachi_suisei_(1st_costume)", // 2782
+    "cecilia_immergreen", // 2810
+    "shiori_novella_(1st_costume)", // 2852
+    "akai_haato", // 2874
+    "sakamata_chloe_(1st_costume)", // 2982
+    "nekomata_okayu_(1st_costume)", // 3035
+    "inugami_korone_(1st_costume)", // 3067
+    "gigi_murin", // 3084
+    "mori_calliope_(1st_costume)", // 3108
+    "takane_lui", // 3184
+    "shigure_ui_(vtuber)", // 3200
+    "watson_amelia_(1st_costume)", // 3219
+    "nanashi_mumei_(1st_costume)", // 3228
+    "inui_toko", // 3290
+    "ouro_kronii_(1st_costume)", // 3388
+    "tsunomaki_watame", // 3555
+    "omaru_polka", // 3633
+    "momosuzu_nene", // 3648
+    "azki_(hololive)", // 3655
+    "makaino_ririmu", // 3690
+    "don-chan_(usada_pekora)", // 3943
+    "tsukino_mito", // 3993
+    "takodachi_(ninomae_ina'nis)", // 4109
+    "kiryu_coco", // 4184
+    "lize_helesta", // 4352
+    "kazama_iroha", // 4365
+    "natsuiro_matsuri", // 4428
+    "shirakami_fubuki_(1st_costume)", // 4544
+    "uruha_rushia", // 4656
+    "koseki_bijou", // 4699
+    "raora_panthera", // 4820
+    "usada_pekora_(1st_costume)", // 4832
+    "ange_katrina", // 5006
+    "hakui_koyori", // 5077
+    "murasaki_shion", // 5174
+    "shiranui_flare", // 5213
+    "nakiri_ayame", // 5364
+    "ceres_fauna", // 5577
+    "irys_(hololive)", // 5722
+    "la+_darknesss", // 5819
+    "mococo_abyssgard", // 5948
+    "fuwawa_abyssgard", // 6023
+    "houshou_marine_(1st_costume)", // 6111
+    "shishiro_botan", // 6428
+    "sakamata_chloe", // 7016
+    "shirogane_noel", // 7075
+    "inugami_korone", // 7197
+    "hakos_baelz", // 7261
+    "watson_amelia", // 7262
+    "nerissa_ravencroft", // 7272
+    "shiori_novella", // 7434
+    "yukihana_lamy", // 7507
+    "gawr_gura_(1st_costume)", // 7555
+    "amane_kanata", // 7666
+    "oozora_subaru", // 7725
+    "ookami_mio", // 8008
+    "minato_aqua", // 9517
+    "nanashi_mumei", // 9565
+    "tokoyami_towa", // 9763
+    "sakura_miko", // 10043
+    "takanashi_kiara", // 10288
+    "nekomata_okayu", // 11458
+    "usada_pekora", // 11696
+    "mori_calliope", // 12322
+    "ninomae_ina'nis", // 12335
+    "ouro_kronii", // 13959
+    "hoshimachi_suisei", // 14918
+    "shirakami_fubuki", // 15544
+    "gawr_gura", // 16321
+    "houshou_marine", // 17574
 ];
